@@ -1,0 +1,25 @@
+[user]
+	name = Miguel Madero
+	email = git@miguelmadero.com
+[color]
+	ui = true
+[diff]
+	tool = bc3
+[difftool "bc3"]
+	cmd = /home/miguelmadero/git-diff-wrapper.sh
+[merge]
+	tool = bc3
+[mergetool "bc3"]
+	cmd = /usr/bin/bcompare $LOCAL\n    $REMOTE $BASE $MERGED
+	trustExitCode = true
+[credential]
+	helper = cache --timeout=3600
+[alias]
+	pu = push
+	ci = commit
+	co = checkout
+	br = branch
+	st = status
+	dt = difftool
+	phm = push heroku master
+	rtw = !sh -c 'echo "***Original status" && git st && git add . && git checkout --force && echo "***Final status" && git st'
