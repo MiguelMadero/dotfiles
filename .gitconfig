@@ -1,25 +1,42 @@
 [user]
-	name = Miguel Madero
-	email = git@miguelmadero.com
-[color]
-	ui = true
-[diff]
-	tool = bc3
-[difftool "bc3"]
-	cmd = /home/miguelmadero/git-diff-wrapper.sh
-[merge]
-	tool = bc3
-[mergetool "bc3"]
-	cmd = /usr/bin/bcompare $LOCAL\n    $REMOTE $BASE $MERGED
-	trustExitCode = true
+  name = Miguel Madero
+  email = git@miguelmadero.com
 [credential]
-	helper = cache --timeout=3600
+  helper = osxkeychain
+[color]
+  ui = true
 [alias]
-	pu = push
-	ci = commit
-	co = checkout
-	br = branch
-	st = status
-	dt = difftool
-	phm = push heroku master
-	rtw = !sh -c 'echo "***Original status" && git st && git add . && git checkout --force && echo "***Final status" && git st'
+  pu = push
+  ci = commit
+  co = checkout
+  br = branch
+  st = status
+  dt = difftool
+  sync = !git up && git push
+  ca = !git add . && git commit -am
+  up = !git pull --rebase && git submodule update
+  phm = push heroku master
+  rtw = !sh -c 'echo "***Original status" && git st && git add . && git checkout --force && echo "***Final status" && git st'
+  sup = !git submodule update && git st
+  wip = !git st && git add . && git ci -am "[WIP]" && git st
+  unwip = !git reset HEAD^ && git st
+  rewrite = rebase -i HEAD~10
+  trymerge = merge --no-commit --no-ff origin/master
+[push]
+  default = tracking
+[pull]
+  rebase = true
+[merge]
+  tool = diffmerge
+[mergetool "diffmerge"]
+  cmd = diffmerge --merge\n--result=$MERGED $LOCAL $BASE $REMOTE
+  trustExitCode = true
+[diff]
+  tool = diffmerge
+[difftool "diffmerge"]
+  cmd = diffmerge $LOCAL $REMOTE
+[mergetool]
+  keepBackup = false
+[filter "media"]
+  clean = git-media-clean %f
+  smudge = git-media-smudge %f
