@@ -30,4 +30,23 @@ export ENABLE_FOCUS_FOR_SPEC_FILTERING=true
 export RSPEC_RETRY_COUNT=1
 
 # PF
-alias c='cd ~/pfcode/carbon'
+alias pc='cd ~/pfcode/carbon'
+alias pt='cd ~/pfcode/tyrion'
+alias pc19='cd ~/pfcode/carbon19'
+alias pt19='cd ~/pfcode/tyrion19'
+ulimit -n 9480
+alias pfchrome='open -a /Applications/Google\ Chrome\ Canary.app/ --args --disable-web-security'
+alias memcanary='open -a /Applications/Google\ Chrome\ Canary.app/ --enable-memory-info'
+alias memchrome='open -a /Applications/Google\ Chrome.app/ --args --enable-memory-info'
+alias cleancanary2='open -a /Applications/Google\ Chrome\ Canary.app/ --args --user-data-dir=/dev/null --enable-memory-info'
+alias cleancanary='open -a "Google Chrome Canary" --args --user-data-dir=/dev/null --incognito --enable-memory-info'
+alias cleanchrome='open -a /Applications/Google\ Chrome.app/ --args --user-data-dir=/dev/null'
+
+eval "$(grunt --completion=bash)"
+alias htmlwhich='ls -l /Library/WebServer/Documents/html'
+alias htmldist='sudo rm /Library/WebServer/Documents/html && sudo ln -s `pwd`/dist /Library/WebServer/Documents/html && htmlwhich'
+alias htmldev='sudo rm /Library/WebServer/Documents/html && sudo ln -s `pwd`/tmp/result /Library/WebServer/Documents/html && htmlwhich'
+
+### Added by the Heroku Toolbelt
+export PATH="/usr/local/heroku/bin:$PATH"
+if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi

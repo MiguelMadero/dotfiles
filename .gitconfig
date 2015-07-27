@@ -1,14 +1,15 @@
 [user]
   name = Miguel Madero
-  email = git@miguelmadero.com
+  email = mmadero@practicefusion.com
 [credential]
-  helper = osxkeychain
+  helper = store
 [color]
   ui = true
 [alias]
   pu = push
   ci = commit
   co = checkout
+  cor = !git co `git br | grep $1`
   br = branch
   st = status
   dt = difftool
@@ -22,21 +23,44 @@
   unwip = !git reset HEAD^ && git st
   rewrite = rebase -i HEAD~10
   trymerge = merge --no-commit --no-ff origin/master
+  # br-dmerge = !git co %1 && git pull origin %1 && git br --merged | grep -v "^*" | xargs -n 1 git br -d && git br
+  br-dmerged = !git co develop && git pull && git br --merged | grep -v "^*" | xargs -n 1 git br -d && git br
+  br-dmerged7-23 = !git co release/2015-07-23_EHR && git pull origin release/2015-07-23_EHR && git br --merged | grep -v "^*" | xargs -n 1 git br -d && git br
+  br-dmerged8-13 = !git co release/2015-08-13_EHR && git pull origin release/2015-08-13_EHR && git br --merged | grep -v "^*" | xargs -n 1 git br -d && git br
+  br-dmerged7-30 = !git co release/2015-07-30_EHR && git pull origin release/2015-07-30_EHR && git br --merged | grep -v "^*" | xargs -n 1 git br -d && git br
+  pr7-30 = !open "https://mmadero@stash.hq.practicefusion.com/projects/UI/repos/`basename "$PWD"`/pull-requests?create\\&targetBranch=refs/heads/release/2015-07-30_EHR\\&sourceBranch=refs/heads/`git rev-parse --abbrev-ref HEAD`"
+  pr7-23 = !open "https://mmadero@stash.hq.practicefusion.com/projects/UI/repos/`basename "$PWD"`/pull-requests?create\\&targetBranch=refs/heads/release/2015-07-23_EHR\\&sourceBranch=refs/heads/`git rev-parse --abbrev-ref HEAD`"
+  pr8-13 = !open "https://mmadero@stash.hq.practicefusion.com/projects/UI/repos/`basename "$PWD"`/pull-requests?create\\&targetBranch=refs/heads/release/2015-08-13_EHR\\&sourceBranch=refs/heads/`git rev-parse --abbrev-ref HEAD`"
+  # done = !git push && git pr
+  done7-30 = !git push && git pr7-30
+  done7-23 = !git push && git pr7-23
+  done8-13 = !git push && git pr8-13
 [push]
-  default = tracking
+  default = current
 [pull]
   rebase = true
-[merge]
-  tool = diffmerge
 [mergetool "diffmerge"]
   cmd = diffmerge --merge\n--result=$MERGED $LOCAL $BASE $REMOTE
   trustExitCode = true
-[diff]
-  tool = diffmerge
-[difftool "diffmerge"]
-  cmd = diffmerge $LOCAL $REMOTE
-[mergetool]
-  keepBackup = false
+#[diff]
+#  external = /Users/mmadero/git-diff-wrapper.sh
 [filter "media"]
-  clean = git-media-clean %f
-  smudge = git-media-smudge %f
+  clean = git media clean %f
+  smudge = git media smudge %f
+  required = true
+[difftool "sourcetree"]
+  cmd = " "
+  path =
+[mergetool "sourcetree"]
+  cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+  trustExitCode = true
+[core]
+  excludesfile = /Users/mmadero/.gitignore_global
+[diff]
+  tool = bc3
+[merge]
+  tool = bc3
+[mergetool]
+  bc3 = trustExitCode
+[difftool]
+  prompt = false
