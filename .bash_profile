@@ -47,6 +47,20 @@ alias htmlwhich='ls -l /Library/WebServer/Documents/html'
 alias htmldist='sudo rm /Library/WebServer/Documents/html && sudo ln -s `pwd`/dist /Library/WebServer/Documents/html && htmlwhich'
 alias htmldev='sudo rm /Library/WebServer/Documents/html && sudo ln -s `pwd`/tmp/result /Library/WebServer/Documents/html && htmlwhich'
 
+alias outdated?='npm outdated && bower list | grep latest'
+
+alias cptyriondist='cp -r ../tyrion/dist/ bower_components/tyrion/dist/'
+
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
+
+## Ember Stuff
+alias nom='npm cache clear && rm -rf node_modules dist tmp && npm install'
+alias bom='bower cache clean && rm -rf bower_components dist tmp && bower install'
+alias nombom='npm cache clear && bower cache clean && rm -rf node_modules bower_components dist tmp && npm install && bower install'
+
+
+## NPM Stuff
+alias npm-uselocal='npm set registry http://127.0.0.1:5080'
+alias npm-useremote='npm set registry https://registry.npmjs.org'

@@ -2,7 +2,7 @@
   name = Miguel Madero
   email = mmadero@practicefusion.com
 [credential]
-  helper = store
+	helper = store
 [color]
   ui = true
 [alias]
@@ -23,18 +23,21 @@
   unwip = !git reset HEAD^ && git st
   rewrite = rebase -i HEAD~10
   trymerge = merge --no-commit --no-ff origin/master
-  # br-dmerge = !git co %1 && git pull origin %1 && git br --merged | grep -v "^*" | xargs -n 1 git br -d && git br
-  br-dmerged = !git co develop && git pull && git br --merged | grep -v "^*" | xargs -n 1 git br -d && git br
-  br-dmerged7-23 = !git co release/2015-07-23_EHR && git pull origin release/2015-07-23_EHR && git br --merged | grep -v "^*" | xargs -n 1 git br -d && git br
-  br-dmerged8-13 = !git co release/2015-08-13_EHR && git pull origin release/2015-08-13_EHR && git br --merged | grep -v "^*" | xargs -n 1 git br -d && git br
-  br-dmerged7-30 = !git co release/2015-07-30_EHR && git pull origin release/2015-07-30_EHR && git br --merged | grep -v "^*" | xargs -n 1 git br -d && git br
-  pr7-30 = !open "https://mmadero@stash.hq.practicefusion.com/projects/UI/repos/`basename "$PWD"`/pull-requests?create\\&targetBranch=refs/heads/release/2015-07-30_EHR\\&sourceBranch=refs/heads/`git rev-parse --abbrev-ref HEAD`"
-  pr7-23 = !open "https://mmadero@stash.hq.practicefusion.com/projects/UI/repos/`basename "$PWD"`/pull-requests?create\\&targetBranch=refs/heads/release/2015-07-23_EHR\\&sourceBranch=refs/heads/`git rev-parse --abbrev-ref HEAD`"
-  pr8-13 = !open "https://mmadero@stash.hq.practicefusion.com/projects/UI/repos/`basename "$PWD"`/pull-requests?create\\&targetBranch=refs/heads/release/2015-08-13_EHR\\&sourceBranch=refs/heads/`git rev-parse --abbrev-ref HEAD`"
+  br-dmerge = git br --merged | grep -v "^*" | xargs -n 1 git br -d && git br
+  br-dmerged = !git co develop && git pull && git remote prune origin && git br --merged | grep -v "^*" | xargs -n 1 git br -d && git br
+  br-dmerged01-28 = !git co release/2016-01-28_EHR && git pull origin release/2016-01-28_EHR && git remote prune origin && git br --merged | grep -v "^*" | xargs -n 1 git br -d && git br
+  br-dmerged02-11 = !git co release/2016-02-11_EHR && git pull origin release/2016-02-11_EHR && git remote prune origin && git br --merged | grep -v "^*" | xargs -n 1 git br -d && git br
+  br-dmergedCLI = !git co feature/LABS-10019-ember-cli-master && git pull origin feature/LABS-10019-ember-cli-master && git remote prune origin && git br --merged | grep -v "^*" | xargs -n 1 git br -d && git br
+  br-dmerged01-14 = !git co release/2016-01-14_EHR && git pull origin release/2016-01-14_EHR && git remote prune origin && git br --merged | grep -v "^*" | xargs -n 1 git br -d && git br
+  pr01-14 = !open "https://mmadero@stash.hq.practicefusion.com/projects/UI/repos/`basename "$PWD"`/pull-requests?create\\&targetBranch=refs/heads/release/2016-01-14_EHR\\&sourceBranch=refs/heads/`git rev-parse --abbrev-ref HEAD`"
+  pr01-28 = !open "https://mmadero@stash.hq.practicefusion.com/projects/UI/repos/`basename "$PWD"`/pull-requests?create\\&targetBranch=refs/heads/release/2016-01-28_EHR\\&sourceBranch=refs/heads/`git rev-parse --abbrev-ref HEAD`"
+  pr02-11 = !open "https://mmadero@stash.hq.practicefusion.com/projects/UI/repos/`basename "$PWD"`/pull-requests?create\\&targetBranch=refs/heads/release/2016-02-11_EHR\\&sourceBranch=refs/heads/`git rev-parse --abbrev-ref HEAD`"
+  prCLI = !open "https://mmadero@stash.hq.practicefusion.com/projects/UI/repos/`basename "$PWD"`/pull-requests?create\\&targetBranch=refs/heads/feature/LABS-10019-ember-cli-master\\&sourceBranch=refs/heads/`git rev-parse --abbrev-ref HEAD`"
   # done = !git push && git pr
-  done7-30 = !git push && git pr7-30
-  done7-23 = !git push && git pr7-23
-  done8-13 = !git push && git pr8-13
+  done01-14 = !git push && git pr01-14
+  done01-28 = !git push && git pr01-28
+  done02-11 = !git push && git pr02-11
+  doneCLI = !git push && git prCLI
 [push]
   default = current
 [pull]
