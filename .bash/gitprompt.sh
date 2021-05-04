@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 if [ "x$__GIT_PROMPT_DIR" == "x" ]
 then
   __GIT_PROMPT_DIR=~/.bash
