@@ -7,6 +7,6 @@ alias ..='cd ..'
 alias t='date +"%T"'
 # alias sl='sudo pm-suspend'
 # alias b='upower -i /org/freedesktop/UPower/devices/battery_BAT0 | grep -E "state|to\ full|to\ empty|percentage"'
-alias update='git pull --rebase && git submodule update'
+# alias update='git pull --rebase && git submodule update'
 # alias whosusingpg='ps auxww | grep ^postgres'
 
