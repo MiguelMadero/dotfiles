@@ -10,3 +10,4 @@ alias t='date +"%T"'
 # alias update='git pull --rebase && git submodule update'
 # alias whosusingpg='ps auxww | grep ^postgres'
 
+alias gshell='gcloud beta compute ssh --zone "us-west1-b" "genomics"  --project "genomics-in-the-cloud-gatk"'

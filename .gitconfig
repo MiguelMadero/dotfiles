@@ -4,6 +4,7 @@
   pu = push
   ci = commit
   co = checkout
+  cp = cherry-pick
   cor = !git co `git br | grep $1`
   br = branch
   st = status
@@ -15,7 +16,8 @@
   unwip = !git reset HEAD^ && git st
   rewrite = rebase -i HEAD~10
   br-dmerge = git br --merged | grep -v "^*" | xargs -n 1 git br -d && git br
-  br-dmerged = !git co develop && git pull && git remote prune origin && git br --merged | grep -v "^*" | xargs -n 1 git br -d && git br
+  br-dmerged = !git co main && git pull && git remote prune origin && git br --merged | grep -v "^*" | xargs -n 1 git br -d && git br
+  yolo = !git add . && git ci --amend && git push --force 
 [push]
   default = current
 [pull]
@@ -31,3 +33,19 @@
   bc3 = trustExitCode
 [difftool]
   prompt = false
+[user]
+	name = Miguel Madero
+	email = git@miguelmadero.com
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+[core]
+	excludesfile = /Users/mmadero/.gitignore_global
+	editor = code --wait
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+[init]
+	defaultBranch = main
